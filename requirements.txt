@@ -1,0 +1,7 @@
+Flask
+Flask-SQLAlchemy
+sqlalchemy-firebird
+Flask-Cors
+Werkzeug
+fdb
+requests
