@@ -1,4 +1,4 @@
-# API RENAVE
+# APLICAÇÃO RENAVE
 
 ### Requisitos Funcionais
 
