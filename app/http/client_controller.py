@@ -10,6 +10,7 @@ def enviar_clientes(clientes):
     load_dotenv()
 
     token = os.getenv('API_KEY')
+    url_api = os.getenv('URL_RENAVE')
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {token}"
@@ -38,7 +39,7 @@ def enviar_clientes(clientes):
                 "uf": cliente["UF"],
             }
 
-            url = f"https://api.renavefacil.net/v2/integration/dms/09525558000165/client"
+            url = f"{url_api}/{cliente["CNPJ_EMPRESA"]}/client"
 
             response = requests.post(url, json=clientes_data, headers=headers)
 
