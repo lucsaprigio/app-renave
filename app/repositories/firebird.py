@@ -1,10 +1,18 @@
 from firebird.driver import connect
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+database = os.getenv('DATABASE')
+user = os.getenv('DATABASE_USER')
+password = os.getenv('DATABASE_PASSWORD')
 
 class FirebirdService:
     def __init__(self):
-        self.database = 'speedautomac.ddns.net:/database/Servicos/denatran.fdb'
-        self.user = 'sysdba'
-        self.password = 'masterkey'
+        self.database = database
+        self.user = user
+        self.password = password
         self.connection = None
 
     def connect(self):
