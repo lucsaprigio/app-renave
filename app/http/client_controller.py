@@ -23,29 +23,29 @@ def enviar_clientes(clientes):
     for cliente in clientes:
         try:
             # celular = int(cliente["CELULAR"]) if cliente["CELULAR"] else None
-            id_cliente = cliente["CNPJ"] if cliente["CPF"] in [None, ''] else cliente["CPF"]
-            endereco = cliente["ENDERECO"].split(",")[0]
-            numero = cliente["ENDERECO"].split(",")[1].strip() # strip remove os espaços extras
+            id_cliente = cliente['CNPJ'] if cliente['CPF'] in [None, ''] else cliente['CPF']
+            endereco = cliente['ENDERECO'].split(",")[0]
+            numero = cliente['ENDERECO'].split(",")[1].strip() # strip remove os espaços extras
 
             clientes_data = {
                 "id": id_cliente,
-                "tipoPessoa": cliente["PESSOA"],
-                "razaoSocial": cliente["RAZAO_SOCIAL"],
-                "cep": str(cliente["CEP"] if cliente["CEP"] is not None else ""),
+                "tipoPessoa": cliente['PESSOA'],
+                "razaoSocial": cliente['RAZAO_SOCIAL'],
+                "cep": str(cliente['CEP'] if cliente['CEP'] is not None else ""),
                 "logradouro": endereco,
                 "numero": str(numero), 
-                "bairro":cliente["BAIRRO"],
-                "cidade":cliente["NOME_CIDADE"],
-                "uf": cliente["UF"],
+                "bairro":cliente['BAIRRO'],
+                "cidade":cliente['NOME_CIDADE'],
+                "uf": cliente['UF'],
             }
 
-            url = f"{url_api}/{cliente["CNPJ_EMPRESA"]}/client"
+            url = f"{url_api}/{cliente['CNPJ_EMPRESA']}/client"
 
             response = requests.post(url, json=clientes_data, headers=headers)
 
             if (response.status_code == 409):
                 print(response.status_code, response.json())
-                clienteRepository.update_clientes(cliente["CODIGO"])
+                clienteRepository.update_clientes(cliente['CODIGO'])
             elif (response.status_code == 403):
                 print(response.status_code, response.json())
                 break
@@ -57,7 +57,7 @@ def enviar_clientes(clientes):
             elif response.status_code == 500:
                 print(response.status_code, response.json())
             elif response.status_code == 201:
-                clienteRepository.update_clientes(cliente["CODIGO"])
+                clienteRepository.update_clientes(cliente['CODIGO'])
                 print(response.json())
 
         except Exception as e:

@@ -22,22 +22,22 @@ def enviar_veiculos(veiculos):
     for veiculo in veiculos:
         try:
             veiculos_data = {
-                "tipoVeiculo": veiculo["NOVO_VELHO"],
-                "chassi": veiculo["CHASSI"],
-                "descricao":veiculo["DESCRICAO"],  # Falta no banco
-                "anoFabricacao": veiculo["ANO_FAB"],
-                "anoModelo":veiculo["ANO_MODELO"],
-                "placa":veiculo["PLACA"],
-                "renavam": veiculo["RENAVAM"],
+                "tipoVeiculo": veiculo['NOVO_VELHO'],
+                "chassi": veiculo['CHASSI'],
+                "descricao":veiculo['DESCRICAO'],  # Falta no banco
+                "anoFabricacao": veiculo['ANO_FAB'],
+                "anoModelo":veiculo['ANO_MODELO'],
+                "placa":veiculo['PLACA'],
+                "renavam": veiculo['RENAVAM'],
             }
 
-            url = f"{url_api}/{veiculo["CNPJ_EMPRESA"]}/vehicle"
+            url = f"{url_api}/{veiculo['CNPJ_EMPRESA']}/vehicle"
 
             response = requests.post(url, json=veiculos_data, headers=headers)
 
             if response.status_code == 201:
                 print('Veículo cadastrado com sucesso')
-                veiculosRepository.update_veiculos(veiculo["CODIGO"])
+                veiculosRepository.update_veiculos(veiculo['CODIGO'])
             else :
                 print(response.text)
         except Exception as e:
